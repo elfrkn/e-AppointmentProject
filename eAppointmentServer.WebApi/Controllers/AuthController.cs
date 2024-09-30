@@ -1,14 +1,17 @@
 ﻿using eAppointmentServer.Application.Features.Auth.Login;
+using eAppointmentServer.WebApi.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eAppointmentServer.WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public sealed class AuthController (IMediator _mediator): ControllerBase
+    
+    public sealed class AuthController : ApiController
     {
+        public AuthController(IMediator mediator) : base(mediator)
+        {
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginCommand request, CancellationToken cancellationToken)

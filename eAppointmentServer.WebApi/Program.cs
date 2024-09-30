@@ -1,6 +1,9 @@
 using DefaultCorsPolicyNugetPackage;
 using eAppointmentServer.Application;
+using eAppointmentServer.Domain.Entities;
 using eAppointmentServer.Infrastructure;
+using eAppointmentServer.WebApi;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,4 +31,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+Helper.CreateUserAsync(app).Wait();//Oluşturduğumuz helper classını tanımladık.Asenkron metot olduğu için Wait yazdık.
+
+    app.Run();
